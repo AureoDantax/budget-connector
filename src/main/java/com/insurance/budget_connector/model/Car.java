@@ -2,8 +2,10 @@ package com.insurance.budget_connector.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
@@ -13,6 +15,7 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -25,7 +28,7 @@ public class Car {
     private String licensePlate;
     @NotBlank(message = "year is mandatory")
     private String year;
-    @NotBlank(message = "FIPE value is mandatory")
+    @NotNull(message = "FIPE value is mandatory")
     private BigDecimal fipeValue;
 
 }

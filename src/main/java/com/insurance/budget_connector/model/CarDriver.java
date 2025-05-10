@@ -1,27 +1,31 @@
 package com.insurance.budget_connector.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "customers")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-public class Customer {
+public class CarDriver {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    @NotBlank(message = "name is mandatory")
-    private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "car_id")
+    private Car car;
+
     @ManyToOne
     @JoinColumn(name = "driver_id")
     private Driver driver;
 
+    private Boolean isMainDriver;
 
+    public CarDriver(Driver driver, Car car,Boolean isMainDriver) {
+        this.driver = driver;
+        this.car = car;
+    }
 }
